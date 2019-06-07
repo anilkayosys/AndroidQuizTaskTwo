@@ -46,7 +46,7 @@ public class NotificationHelper extends ContextWrapper {
         DateFormat df = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);
         nBuilder = getBasicNotificationBuilder(context, CHANNEL_ID_TIMER, true);
         nBuilder.setContentTitle("Timer is Running.")
-                .setContentText("Time Left: " + df.format(new Date(wakeUpTime)))
+                .setContentText("End Time: " + df.format(new Date(wakeUpTime)))
                 .setContentIntent(getPendingIntentWithStack(context, MainActivity.class))
                 .setOngoing(true);
         createNotificationChannel();
