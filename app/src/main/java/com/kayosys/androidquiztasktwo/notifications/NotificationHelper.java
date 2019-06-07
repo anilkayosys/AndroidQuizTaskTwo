@@ -99,10 +99,4 @@ public class NotificationHelper extends ContextWrapper {
         nManager.cancel(TIMER_ID);
     }
 
-    public void update(Long wakeupTime) {
-        DateFormat df = SimpleDateFormat.getTimeInstance(SimpleDateFormat.SHORT);
-        nBuilder.setContentText("Time Left: " + df.format(new Date(wakeupTime)));
-        nBuilder.setUsesChronometer(true);
-        notificationManager.notify(TIMER_ID, nBuilder.build());
-    }
 }

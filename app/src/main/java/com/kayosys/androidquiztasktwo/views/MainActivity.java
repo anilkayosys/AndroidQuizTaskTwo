@@ -8,8 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.TextView;
 
 import com.kayosys.androidquiztasktwo.R;
 import com.kayosys.androidquiztasktwo.notifications.NotificationExpireReceiver;
@@ -24,7 +22,6 @@ import java.util.Calendar;
  * Main View when view open notification trigger and shows until it's time finished
  */
 public class MainActivity extends AppCompatActivity {
-    private TextView txt;
     private NotificationHelper notificationHelper;
     private TimerState timerState;
     private SharePref sharePref;
@@ -35,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sharePref = new SharePref(this);
-        txt = findViewById(R.id.startTimerBtn);
         timerState = sharePref.getTimerState();
         notificationHelper = new NotificationHelper(getBaseContext());
 
@@ -48,16 +44,6 @@ public class MainActivity extends AppCompatActivity {
             Long wakeUpTime = setAlarm(MainActivity.this, nowSeconds(), secondsRemaining);
             notificationHelper.showTimerRunning(MainActivity.this, wakeUpTime);
         }
-
-        txt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int minutesRemaining = sharePref.getTimerLength(MainActivity.this);
-                Long secondsRemaining = minutesRemaining * 60L;
-                Long wakeUpTime = setAlarm(MainActivity.this, nowSeconds(), secondsRemaining);
-                notificationHelper.update(wakeUpTime);
-            }
-        });
     }
 
     /*-- get current time mills --*/
